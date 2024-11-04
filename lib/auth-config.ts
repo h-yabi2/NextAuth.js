@@ -28,8 +28,8 @@ export const authConfig: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      session.user.accessToken = token.accessToken;
-      session.user.provider = token.provider;
+      session.user.accessToken = token.accessToken as string | undefined;
+      session.user.provider = token.provider as string | undefined;
       return session;
     },
   },
