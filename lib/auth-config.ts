@@ -1,6 +1,8 @@
 import { NextAuthOptions } from "next-auth";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
 import LineProvider from "next-auth/providers/line";
+import prisma from "./prisma";
 
 export const authConfig: NextAuthOptions = {
   providers: [
@@ -19,6 +21,7 @@ export const authConfig: NextAuthOptions = {
   pages: {
     signIn: "/",
   },
+  adapter: PrismaAdapter(prisma),
   callbacks: {
     async jwt({ token, account, profile }) {
       if (account) {
